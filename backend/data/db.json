@@ -1,0 +1,493 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@hospital.com",
+      "password": "123456",
+      "role": "admin"
+    },
+    {
+      "id": 1770878620650,
+      "name": "surya",
+      "email": "surya@google.com",
+      "password": "123456",
+      "role": "patient"
+    },
+    {
+      "id": 1770903786235,
+      "name": "surya kumar",
+      "email": "singlepasangea@gmail.com",
+      "password": "12345678",
+      "role": "patient"
+    },
+    {
+      "id": 1770985218311,
+      "name": "vhvhj",
+      "email": "bharayeaj@gmail.com",
+      "password": "Babbu@207",
+      "role": "patient"
+    },
+    {
+      "id": 1771235064911,
+      "name": "teja",
+      "email": "suryaaaaa@gmail.com",
+      "password": "12345678",
+      "role": "patient"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1770877980997,
+      "userId": 1,
+      "patientName": "Admin",
+      "age": 23,
+      "gender": "Male",
+      "doctor": "Dr. Sarah Johnson (Cardiology)",
+      "date": "2026-02-19",
+      "time": "11:00 AM",
+      "reason": "civiar pain in headache\n",
+      "status": "confirmed"
+    },
+    {
+      "id": 1770878648069,
+      "userId": 1770878620650,
+      "patientName": "surya",
+      "age": 25,
+      "gender": "Male",
+      "doctor": "Dr. Sarah Johnson (Cardiology)",
+      "date": "2026-02-18",
+      "time": "02:00 PM",
+      "reason": "book for appointment",
+      "status": "confirmed"
+    },
+    {
+      "id": 1770884069373,
+      "userId": 1,
+      "patientName": "Admin",
+      "age": 21,
+      "gender": "Male",
+      "doctor": "Dr. V. Uma Maheswari (Psychiatry)",
+      "date": "2026-02-20",
+      "time": "09:00 AM",
+      "reason": "dddddd",
+      "status": "confirmed"
+    },
+    {
+      "id": 1770903619104,
+      "userId": 1,
+      "patientName": "ssurya",
+      "age": 34,
+      "gender": "Male",
+      "doctor": "Dr. N. Jayasree (Pulmonology)",
+      "date": "2026-02-14",
+      "time": "09:00 AM",
+      "reason": "sffdfbdf",
+      "status": "cancelled"
+    },
+    {
+      "id": 1770903822162,
+      "userId": 1770903786235,
+      "patientName": "surya kumar",
+      "age": 23,
+      "gender": "Male",
+      "doctor": "Dr. P. Srinivas Rao (Cardiology)",
+      "date": "2026-02-21",
+      "time": "10:00 AM",
+      "reason": "csfsdfsfdf",
+      "status": "confirmed"
+    },
+    {
+      "id": 1770961871144,
+      "userId": 1770903786235,
+      "patientName": "surya kumar",
+      "age": 23,
+      "gender": "Male",
+      "doctor": "Dr. K. Sudhakar (ENT)",
+      "date": "2026-02-27",
+      "time": "10:00 AM",
+      "reason": "heart attack",
+      "status": "confirmed"
+    },
+    {
+      "id": 1770985268713,
+      "userId": 1770985218311,
+      "patientName": "vhvhj",
+      "age": 18,
+      "gender": "Male",
+      "doctor": "Dr. K. Lakshmi Devi (Cardiology)",
+      "date": "2026-02-20",
+      "time": "09:00 AM",
+      "reason": "easy gaem\n",
+      "status": "confirmed"
+    },
+    {
+      "id": 1771235125993,
+      "userId": 1771235064911,
+      "patientName": "teja",
+      "age": 23,
+      "gender": "Male",
+      "doctor": "Dr. M. Aruna (Dentistry)",
+      "date": "2026-02-18",
+      "time": "04:00 PM",
+      "reason": "piles",
+      "status": "confirmed"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. P. Srinivas Rao",
+      "specialty": "Cardiology",
+      "experience": "18 years",
+      "rating": 4.9,
+      "patients": "3,200+",
+      "image": "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Dr. K. Lakshmi Devi",
+      "specialty": "Cardiology",
+      "experience": "15 years",
+      "rating": 4.8,
+      "patients": "2,800+",
+      "image": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Dr. M. Venkateswara Reddy",
+      "specialty": "Cardiology",
+      "experience": "22 years",
+      "rating": 5,
+      "patients": "4,500+",
+      "image": "https://randomuser.me/api/portraits/men/42.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Dr. G. Sunitha",
+      "specialty": "Cardiology",
+      "experience": "12 years",
+      "rating": 4.7,
+      "patients": "1,900+",
+      "image": "https://randomuser.me/api/portraits/women/24.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Dr. V. Ramesh Babu",
+      "specialty": "Neurology",
+      "experience": "16 years",
+      "rating": 4.8,
+      "patients": "2,400+",
+      "image": "https://randomuser.me/api/portraits/men/22.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Dr. S. Vijaya Lakshmi",
+      "specialty": "Neurology",
+      "experience": "14 years",
+      "rating": 4.9,
+      "patients": "2,100+",
+      "image": "https://randomuser.me/api/portraits/women/63.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Dr. N. Srinath",
+      "specialty": "Neurology",
+      "experience": "11 years",
+      "rating": 4.7,
+      "patients": "1,700+",
+      "image": "https://randomuser.me/api/portraits/men/52.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Dr. T. Mohan Krishna",
+      "specialty": "Orthopedics",
+      "experience": "19 years",
+      "rating": 4.9,
+      "patients": "3,500+",
+      "image": "https://randomuser.me/api/portraits/men/62.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Dr. A. Padmavathi",
+      "specialty": "Orthopedics",
+      "experience": "13 years",
+      "rating": 4.7,
+      "patients": "2,000+",
+      "image": "https://randomuser.me/api/portraits/women/53.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Dr. K. Siva Kumar",
+      "specialty": "Orthopedics",
+      "experience": "16 years",
+      "rating": 4.8,
+      "patients": "2,600+",
+      "image": "https://randomuser.me/api/portraits/men/72.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Dr. P. Rajeshwari",
+      "specialty": "Ophthalmology",
+      "experience": "14 years",
+      "rating": 4.8,
+      "patients": "2,200+",
+      "image": "https://randomuser.me/api/portraits/women/17.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Dr. D. Narayana Rao",
+      "specialty": "Ophthalmology",
+      "experience": "21 years",
+      "rating": 5,
+      "patients": "4,100+",
+      "image": "https://randomuser.me/api/portraits/men/37.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Dr. B. Uma Devi",
+      "specialty": "Ophthalmology",
+      "experience": "11 years",
+      "rating": 4.7,
+      "patients": "1,800+",
+      "image": "https://randomuser.me/api/portraits/women/27.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Dr. C. Sridhar",
+      "specialty": "Dentistry",
+      "experience": "15 years",
+      "rating": 4.8,
+      "patients": "2,500+",
+      "image": "https://randomuser.me/api/portraits/men/83.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Dr. M. Aruna",
+      "specialty": "Dentistry",
+      "experience": "12 years",
+      "rating": 4.7,
+      "patients": "1,900+",
+      "image": "https://randomuser.me/api/portraits/women/73.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Dr. V. Prasad",
+      "specialty": "Dentistry",
+      "experience": "9 years",
+      "rating": 4.6,
+      "patients": "1,400+",
+      "image": "https://randomuser.me/api/portraits/men/93.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Dr. G. Lalitha",
+      "specialty": "Pediatrics",
+      "experience": "17 years",
+      "rating": 4.9,
+      "patients": "3,300+",
+      "image": "https://randomuser.me/api/portraits/women/13.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Dr. S. Krishna Murthy",
+      "specialty": "Pediatrics",
+      "experience": "14 years",
+      "rating": 4.8,
+      "patients": "2,400+",
+      "image": "https://randomuser.me/api/portraits/men/23.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Dr. P. Anitha",
+      "specialty": "Pediatrics",
+      "experience": "11 years",
+      "rating": 4.7,
+      "patients": "1,800+",
+      "image": "https://randomuser.me/api/portraits/women/43.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Dr. R. Venkata Ramana",
+      "specialty": "General Medicine",
+      "experience": "20 years",
+      "rating": 4.9,
+      "patients": "5,000+",
+      "image": "https://randomuser.me/api/portraits/men/73.jpg"
+    },
+    {
+      "id": 21,
+      "name": "Dr. T. Saroja",
+      "specialty": "General Medicine",
+      "experience": "16 years",
+      "rating": 4.8,
+      "patients": "3,100+",
+      "image": "https://randomuser.me/api/portraits/women/83.jpg"
+    },
+    {
+      "id": 22,
+      "name": "Dr. K. Ravi Shankar",
+      "specialty": "General Medicine",
+      "experience": "13 years",
+      "rating": 4.7,
+      "patients": "2,200+",
+      "image": "https://randomuser.me/api/portraits/men/53.jpg"
+    },
+    {
+      "id": 23,
+      "name": "Dr. N. Jayasree",
+      "specialty": "Pulmonology",
+      "experience": "14 years",
+      "rating": 4.8,
+      "patients": "1,900+",
+      "image": "https://randomuser.me/api/portraits/women/93.jpg"
+    },
+    {
+      "id": 24,
+      "name": "Dr. M. Srinivasa Rao",
+      "specialty": "Pulmonology",
+      "experience": "17 years",
+      "rating": 4.9,
+      "patients": "2,600+",
+      "image": "https://randomuser.me/api/portraits/men/63.jpg"
+    },
+    {
+      "id": 25,
+      "name": "Dr. L. Radhika",
+      "specialty": "Dermatology",
+      "experience": "12 years",
+      "rating": 4.7,
+      "patients": "1,800+",
+      "image": "https://randomuser.me/api/portraits/women/67.jpg"
+    },
+    {
+      "id": 26,
+      "name": "Dr. B. Nageswara Rao",
+      "specialty": "Dermatology",
+      "experience": "15 years",
+      "rating": 4.8,
+      "patients": "2,300+",
+      "image": "https://randomuser.me/api/portraits/men/47.jpg"
+    },
+    {
+      "id": 27,
+      "name": "Dr. S. Shobha Rani",
+      "specialty": "Gynecology",
+      "experience": "18 years",
+      "rating": 4.9,
+      "patients": "3,400+",
+      "image": "https://randomuser.me/api/portraits/women/57.jpg"
+    },
+    {
+      "id": 28,
+      "name": "Dr. P. Sridevi",
+      "specialty": "Gynecology",
+      "experience": "14 years",
+      "rating": 4.8,
+      "patients": "2,500+",
+      "image": "https://randomuser.me/api/portraits/women/77.jpg"
+    },
+    {
+      "id": 29,
+      "name": "Dr. K. Sudhakar",
+      "specialty": "ENT",
+      "experience": "16 years",
+      "rating": 4.8,
+      "patients": "2,400+",
+      "image": "https://randomuser.me/api/portraits/men/87.jpg"
+    },
+    {
+      "id": 30,
+      "name": "Dr. M. Jyothi",
+      "specialty": "ENT",
+      "experience": "12 years",
+      "rating": 4.7,
+      "patients": "1,800+",
+      "image": "https://randomuser.me/api/portraits/women/97.jpg"
+    },
+    {
+      "id": 31,
+      "name": "Dr. A. Chandra Sekhar",
+      "specialty": "Psychiatry",
+      "experience": "15 years",
+      "rating": 4.8,
+      "patients": "2,100+",
+      "image": "https://randomuser.me/api/portraits/men/77.jpg"
+    },
+    {
+      "id": 32,
+      "name": "Dr. V. Uma Maheswari",
+      "specialty": "Psychiatry",
+      "experience": "13 years",
+      "rating": 4.7,
+      "patients": "1,700+",
+      "image": "https://randomuser.me/api/portraits/women/47.jpg"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "icon": "heartbeat",
+      "title": "Cardiology",
+      "description": "Expert heart care...",
+      "doctors": "15+ specialists",
+      "bgColor": "bg-red-50"
+    },
+    {
+      "id": 2,
+      "icon": "brain",
+      "title": "Neurology",
+      "description": "Comprehensive care for brain...",
+      "doctors": "12+ specialists",
+      "bgColor": "bg-purple-50"
+    },
+    {
+      "id": 3,
+      "icon": "baby",
+      "title": "Pediatrics",
+      "description": "Child‑friendly medical care...",
+      "doctors": "20+ specialists",
+      "bgColor": "bg-pink-50"
+    },
+    {
+      "id": 4,
+      "icon": "bone",
+      "title": "Orthopedics",
+      "description": "Treatment for bone, joint...",
+      "doctors": "18+ specialists",
+      "bgColor": "bg-orange-50"
+    },
+    {
+      "id": 5,
+      "icon": "eye",
+      "title": "Ophthalmology",
+      "description": "Complete eye care...",
+      "doctors": "10+ specialists",
+      "bgColor": "bg-blue-50"
+    },
+    {
+      "id": 6,
+      "icon": "tooth",
+      "title": "Dentistry",
+      "description": "General and cosmetic dentistry...",
+      "doctors": "14+ specialists",
+      "bgColor": "bg-teal-50"
+    },
+    {
+      "id": 7,
+      "icon": "stethoscope",
+      "title": "General Medicine",
+      "description": "Primary care...",
+      "doctors": "25+ specialists",
+      "bgColor": "bg-green-50"
+    },
+    {
+      "id": 8,
+      "icon": "lungs",
+      "title": "Pulmonology",
+      "description": "Diagnosis and treatment of respiratory diseases...",
+      "doctors": "8+ specialists",
+      "bgColor": "bg-indigo-50"
+    }
+  ]
+}
