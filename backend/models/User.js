@@ -8,11 +8,10 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['patient', 'admin'], default: 'patient' },
 }, { timestamps: true });
 
-// Hash password before saving
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
+// Hash password before saving (Mongoose 7+ promise-based, no next() needed)
+userSchema.pre('save', async function () {
+    if (!this.isModified('password')) return;
     this.password = await bcrypt.hash(this.password, 10);
-    next();
 });
 
 // Compare password method
