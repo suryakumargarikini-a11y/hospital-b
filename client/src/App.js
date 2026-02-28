@@ -6,6 +6,7 @@ import { AppointmentProvider } from './context/AppointmentContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import PrivateRoute from './components/common/PrivateRoute';
+import Chatbot from './components/common/Chatbot';
 
 // Public Pages
 import Home from './pages/Home';
@@ -79,6 +80,7 @@ function App() {
             </main>
             <Footer />
           </div>
+          <Chatbot />
           <Toaster position="top-right" />
         </AppointmentProvider>
       </AuthProvider>
