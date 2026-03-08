@@ -191,7 +191,9 @@ export default function Chatbot() {
                 position: 'fixed',
                 bottom: '24px',
                 right: '24px',
-                zIndex: 9999
+                zIndex: 9999,
+                // CRITICAL: When closed, allow all clicks/touches to pass through to page content below
+                pointerEvents: isOpen ? 'auto' : 'none',
             }}
         >
             {/* ── Chat Window ── */}
@@ -323,6 +325,7 @@ export default function Chatbot() {
                 className={`chatbot-bubble ${isOpen ? 'bubble-open' : ''}`}
                 onClick={() => setIsOpen((o) => !o)}
                 aria-label="Toggle MediBot"
+                style={{ pointerEvents: 'auto' }} // Always clickable even when wrapper has pointer-events:none
             >
                 {isOpen ? (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
