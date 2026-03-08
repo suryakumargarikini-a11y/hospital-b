@@ -12,4 +12,6 @@ const appointmentSchema = new mongoose.Schema({
     status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Appointment', appointmentSchema);
+const { patientDbConnection } = require('../config/db');
+
+module.exports = patientDbConnection.model('Appointment', appointmentSchema);

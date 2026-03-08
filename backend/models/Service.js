@@ -8,4 +8,6 @@ const serviceSchema = new mongoose.Schema({
     bgColor: { type: String },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Service', serviceSchema);
+const { adminDbConnection } = require('../config/db');
+
+module.exports = adminDbConnection.model('Service', serviceSchema);

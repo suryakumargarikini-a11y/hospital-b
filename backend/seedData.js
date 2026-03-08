@@ -60,21 +60,25 @@ const services = [
   { icon: 'lungs', title: 'Pulmonology', description: 'Diagnosis and treatment of respiratory diseases...', doctors: '8+ specialists', bgColor: 'bg-indigo-50' },
 ];
 
+const { connectDBs, adminDbConnection, patientDbConnection } = require('./config/db');
+
 const seedDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('✅ Connected to MongoDB');
+    await connectDBs();
+    console.log('✅ Connected to MongoDB Databases');
 
-    // Clear existing data
+    // Clear existing data from Admin DB
     await Doctor.deleteMany({});
     await Service.deleteMany({});
+
+    // Clear existing data from Patient DB
     await User.deleteMany({ email: 'admin@hospital.com' });
 
-    // Insert doctors and services
+    // Insert doctors and services to Admin DB
     await Doctor.insertMany(doctors);
     await Service.insertMany(services);
 
-    // Create admin user (password will be hashed via pre-save hook)
+    // Create admin user in Patient DB (password will be hashed via pre-save hook)
     await User.create({
       name: 'Admin',
       email: 'admin@hospital.com',

@@ -9,4 +9,6 @@ const doctorSchema = new mongoose.Schema({
     image: { type: String },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Doctor', doctorSchema);
+const { adminDbConnection } = require('../config/db');
+
+module.exports = adminDbConnection.model('Doctor', doctorSchema);
