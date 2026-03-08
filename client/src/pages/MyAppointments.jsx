@@ -42,7 +42,7 @@ const MyAppointments = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {appointments.map((app) => (
               <div
-                key={app.id}
+                key={app._id}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border-l-4 border-blue-500"
               >
                 <div className="flex justify-between items-start">
@@ -63,13 +63,12 @@ const MyAppointments = () => {
                     </p>
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      app.status === 'confirmed'
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${app.status === 'confirmed'
                         ? 'bg-green-100 text-green-800'
                         : app.status === 'pending'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-red-100 text-red-800'
+                      }`}
                   >
                     {app.status}
                   </span>

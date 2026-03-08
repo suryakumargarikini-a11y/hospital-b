@@ -15,6 +15,7 @@ const registerUser = async (req, res) => {
 
   res.status(201).json({
     _id: newUser._id,
+    id: newUser._id,
     name: newUser.name,
     email: newUser.email,
     role: newUser.role,
@@ -36,6 +37,7 @@ const loginUser = async (req, res) => {
 
   res.json({
     _id: user._id,
+    id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,

@@ -33,7 +33,7 @@ const AppointmentForm = () => {
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [selectedDoctorObj, setSelectedDoctorObj] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   // Get data from navigation state
   const selectedDoctor = location.state?.doctorName || '';
   const selectedDepartment = location.state?.department || '';
@@ -90,13 +90,13 @@ const AppointmentForm = () => {
   useEffect(() => {
     if (doctorsList.length > 0 && selectedDoctor) {
       const doctor = doctorsList.find(doc => doc.name === selectedDoctor);
-      
+
       if (doctor) {
         setSelectedDoctorObj(doctor);
         formik.setFieldValue('department', doctor.specialty);
         formik.setFieldValue('doctor', `${doctor.name} (${doctor.specialty})`);
-        
-        const filtered = doctorsList.filter(doc => 
+
+        const filtered = doctorsList.filter(doc =>
           doc.specialty.toLowerCase() === doctor.specialty.toLowerCase()
         );
         setFilteredDoctors(filtered);
@@ -108,8 +108,8 @@ const AppointmentForm = () => {
   useEffect(() => {
     if (doctorsList.length > 0 && selectedDepartment && !selectedDoctor) {
       formik.setFieldValue('department', selectedDepartment);
-      
-      const filtered = doctorsList.filter(doc => 
+
+      const filtered = doctorsList.filter(doc =>
         doc.specialty.toLowerCase() === selectedDepartment.toLowerCase()
       );
       setFilteredDoctors(filtered);
@@ -136,9 +136,9 @@ const AppointmentForm = () => {
     formik.setFieldValue('date', '');
     formik.setFieldValue('time', '');
     setSelectedDoctorObj(null);
-    
+
     if (dept && doctorsList.length > 0) {
-      const filtered = doctorsList.filter(doc => 
+      const filtered = doctorsList.filter(doc =>
         doc.specialty.toLowerCase() === dept.toLowerCase()
       );
       setFilteredDoctors(filtered);
@@ -157,10 +157,10 @@ const AppointmentForm = () => {
   // ✅ CHECK IF DATE IS AVAILABLE FOR SELECTED DOCTOR
   const isDateAvailable = (dateString) => {
     if (!selectedDoctorObj || !selectedDoctorObj.availableDays) return true;
-    
+
     const date = new Date(dateString);
     const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-    
+
     return selectedDoctorObj.availableDays.includes(dayName);
   };
 
@@ -181,7 +181,7 @@ const AppointmentForm = () => {
   // ✅ GET AVAILABILITY BADGE COLOR
   const getAvailabilityBadge = (doctor) => {
     if (!doctor || !doctor.availableDays) return 'bg-gray-100 text-gray-800';
-    
+
     if (doctor.availableDays.includes('Monday') && doctor.availableDays.includes('Wednesday') && doctor.availableDays.includes('Friday')) {
       return 'bg-blue-100 text-blue-800';
     } else if (doctor.availableDays.includes('Tuesday') && doctor.availableDays.includes('Thursday') && doctor.availableDays.includes('Saturday')) {
@@ -223,11 +223,10 @@ const AppointmentForm = () => {
         <input
           type="text"
           {...formik.getFieldProps('patientName')}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 ${
-            formik.touched.patientName && formik.errors.patientName
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 ${formik.touched.patientName && formik.errors.patientName
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
         />
         {formik.touched.patientName && formik.errors.patientName && (
           <p className="text-red-500 text-sm mt-1">{formik.errors.patientName}</p>
@@ -243,11 +242,10 @@ const AppointmentForm = () => {
           <input
             type="number"
             {...formik.getFieldProps('age')}
-            className={`w-full px-4 py-2 border rounded-lg ${
-              formik.touched.age && formik.errors.age
+            className={`w-full px-4 py-2 border rounded-lg ${formik.touched.age && formik.errors.age
                 ? 'border-red-500'
                 : 'border-gray-300'
-            }`}
+              }`}
           />
           {formik.touched.age && formik.errors.age && (
             <p className="text-red-500 text-sm mt-1">{formik.errors.age}</p>
@@ -259,11 +257,10 @@ const AppointmentForm = () => {
           </label>
           <select
             {...formik.getFieldProps('gender')}
-            className={`w-full px-4 py-2 border rounded-lg ${
-              formik.touched.gender && formik.errors.gender
+            className={`w-full px-4 py-2 border rounded-lg ${formik.touched.gender && formik.errors.gender
                 ? 'border-red-500'
                 : 'border-gray-300'
-            }`}
+              }`}
           >
             <option value="">Select</option>
             <option value="Male">Male</option>
@@ -286,11 +283,10 @@ const AppointmentForm = () => {
           value={formik.values.department}
           onChange={handleDepartmentChange}
           onBlur={formik.handleBlur}
-          className={`w-full px-4 py-2 border rounded-lg ${
-            formik.touched.department && formik.errors.department
+          className={`w-full px-4 py-2 border rounded-lg ${formik.touched.department && formik.errors.department
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
         >
           <option value="">Select Department</option>
           {departments.map((dept) => (
@@ -313,16 +309,15 @@ const AppointmentForm = () => {
           {...formik.getFieldProps('doctor')}
           onChange={handleDoctorChange}
           onBlur={formik.handleBlur}
-          className={`w-full px-4 py-2 border rounded-lg ${
-            formik.touched.doctor && formik.errors.doctor
+          className={`w-full px-4 py-2 border rounded-lg ${formik.touched.doctor && formik.errors.doctor
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
           disabled={!formik.values.department}
         >
           <option value="">Select Doctor</option>
           {filteredDoctors.map((doc) => (
-            <option key={doc.id} value={`${doc.name} (${doc.specialty})`}>
+            <option key={doc._id} value={`${doc.name} (${doc.specialty})`}>
               {doc.name} - {doc.availableDays ? doc.availableDays.join(', ') : 'Days not set'}
             </option>
           ))}
@@ -371,11 +366,10 @@ const AppointmentForm = () => {
           min={getMinDate()}
           max={getMaxDate()}
           disabled={!selectedDoctorObj}
-          className={`w-full px-4 py-2 border rounded-lg ${
-            formik.touched.date && formik.errors.date
+          className={`w-full px-4 py-2 border rounded-lg ${formik.touched.date && formik.errors.date
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
           onKeyDown={(e) => e.preventDefault()}
         />
         {formik.touched.date && formik.errors.date && (
@@ -396,11 +390,10 @@ const AppointmentForm = () => {
         <select
           {...formik.getFieldProps('time')}
           disabled={!formik.values.date || !selectedDoctorObj || (formik.values.date && !isDateAvailable(formik.values.date))}
-          className={`w-full px-4 py-2 border rounded-lg ${
-            formik.touched.time && formik.errors.time
+          className={`w-full px-4 py-2 border rounded-lg ${formik.touched.time && formik.errors.time
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
         >
           <option value="">Select Time</option>
           {timeSlots.map((slot) => (
@@ -425,11 +418,10 @@ const AppointmentForm = () => {
         <textarea
           rows="3"
           {...formik.getFieldProps('reason')}
-          className={`w-full px-4 py-2 border rounded-lg ${
-            formik.touched.reason && formik.errors.reason
+          className={`w-full px-4 py-2 border rounded-lg ${formik.touched.reason && formik.errors.reason
               ? 'border-red-500'
               : 'border-gray-300'
-          }`}
+            }`}
           placeholder="Please describe your symptoms or reason for appointment..."
         ></textarea>
         {formik.touched.reason && formik.errors.reason && (

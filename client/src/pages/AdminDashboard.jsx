@@ -18,7 +18,7 @@ const AdminDashboard = () => {
       navigate('/login');
       return;
     }
-    
+
     if (user.role !== 'admin') {
       toast.error('Access denied. Admin only.');
       navigate('/dashboard');
@@ -45,11 +45,11 @@ const AdminDashboard = () => {
     try {
       await updateAppointmentStatus(appointmentId, newStatus, user.id);
       toast.success(`Appointment ${newStatus} successfully!`);
-      
+
       // Update local state
-      setAppointments(prev => 
-        prev.map(app => 
-          app.id === appointmentId 
+      setAppointments(prev =>
+        prev.map(app =>
+          app._id === appointmentId
             ? { ...app, status: newStatus }
             : app
         )
@@ -143,41 +143,37 @@ const AdminDashboard = () => {
           <div className="flex space-x-2">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'all'
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${filter === 'all'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               All Appointments
             </button>
             <button
               onClick={() => setFilter('pending')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'pending'
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${filter === 'pending'
                   ? 'bg-yellow-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Pending
             </button>
             <button
               onClick={() => setFilter('confirmed')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'confirmed'
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${filter === 'confirmed'
                   ? 'bg-green-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Confirmed
             </button>
             <button
               onClick={() => setFilter('cancelled')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                filter === 'cancelled'
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${filter === 'cancelled'
                   ? 'bg-red-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Cancelled
             </button>
@@ -222,7 +218,7 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredAppointments.map((app) => (
-                    <tr key={app.id} className="hover:bg-gray-50">
+                    <tr key={app._id} className="hover:bg-gray-50">
                       <td className="px-6 py-4">
                         <div className="text-sm font-medium text-gray-900">{app.patientName}</div>
                         <div className="text-xs text-gray-500">Age: {app.age} • {app.gender}</div>
@@ -246,14 +242,14 @@ const AdminDashboard = () => {
                         {app.status === 'pending' && (
                           <div className="flex space-x-2">
                             <button
-                              onClick={() => handleStatusUpdate(app.id, 'confirmed')}
+                              onClick={() => handleStatusUpdate(app._id, 'confirmed')}
                               className="text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 px-3 py-1 rounded-lg flex items-center"
                             >
                               <FaCheckCircle className="mr-1" />
                               Confirm
                             </button>
                             <button
-                              onClick={() => handleStatusUpdate(app.id, 'cancelled')}
+                              onClick={() => handleStatusUpdate(app._id, 'cancelled')}
                               className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg flex items-center"
                             >
                               <FaTimesCircle className="mr-1" />

@@ -27,8 +27,8 @@ const Doctors = () => {
 
   const specialties = ['All', ...new Set(doctors?.map(doc => doc?.specialty) || [])];
 
-  const filteredDoctors = filter === 'All' 
-    ? doctors 
+  const filteredDoctors = filter === 'All'
+    ? doctors
     : doctors?.filter(doc => doc?.specialty === filter) || [];
 
   if (loading) {
@@ -57,11 +57,10 @@ const Doctors = () => {
               <button
                 key={specialty}
                 onClick={() => setFilter(specialty)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  filter === specialty
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${filter === specialty
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'bg-white text-gray-700 border hover:border-blue-300'
-                }`}
+                  }`}
               >
                 {specialty}
               </button>
@@ -77,7 +76,7 @@ const Doctors = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredDoctors.map((doctor) => (
               <div
-                key={doctor.id}
+                key={doctor._id}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border border-gray-100"
               >
                 <div className="p-6">
@@ -99,11 +98,11 @@ const Doctors = () => {
                   </div>
                   <div className="mt-4 flex justify-between items-center">
                     <span className="text-sm text-gray-500">Experience: {doctor.experience}</span>
-                    
+
                     {/* ✅ PASS BOTH DOCTOR NAME AND SPECIALTY */}
                     <Link
                       to="/book-appointment"
-                      state={{ 
+                      state={{
                         doctorName: doctor.name,
                         department: doctor.specialty
                       }}
