@@ -185,27 +185,15 @@ export default function Chatbot() {
         date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     return (
-        <div className="chatbot-wrapper">
-            {/* ── Floating Bubble ── */}
-            <button
-                className={`chatbot-bubble ${isOpen ? 'bubble-open' : ''}`}
-                onClick={() => setIsOpen((o) => !o)}
-                aria-label="Toggle MediBot"
-            >
-                {isOpen ? (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                ) : (
-                    <>
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                        </svg>
-                        {hasUnread && <span className="chatbot-unread-dot" />}
-                    </>
-                )}
-            </button>
-
+        <div
+            className="chatbot-wrapper"
+            style={{
+                position: 'fixed',
+                bottom: '24px',
+                right: '24px',
+                zIndex: 9999
+            }}
+        >
             {/* ── Chat Window ── */}
             <div className={`chatbot-window ${isOpen ? 'chatbot-window--open' : ''}`}>
 
@@ -329,6 +317,26 @@ export default function Chatbot() {
                     </button>
                 </div>
             </div>
+
+            {/* ── Floating Bubble ── */}
+            <button
+                className={`chatbot-bubble ${isOpen ? 'bubble-open' : ''}`}
+                onClick={() => setIsOpen((o) => !o)}
+                aria-label="Toggle MediBot"
+            >
+                {isOpen ? (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                ) : (
+                    <>
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                        {hasUnread && <span className="chatbot-unread-dot" />}
+                    </>
+                )}
+            </button>
         </div>
     );
 }
