@@ -60,6 +60,16 @@ export const registerUser = async (userData) => {
   }
 };
 
+export const googleLogin = async (token) => {
+  try {
+    const response = await api.post('/auth/google', { token });
+    return response.data;
+  } catch (error) {
+    console.error('Google Login error:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
 // ---------- APPOINTMENTS ----------
 export const createAppointment = async (appointmentData, userId) => {
   if (!userId) {

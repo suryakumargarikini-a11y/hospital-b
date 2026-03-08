@@ -4,8 +4,9 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
+    password: { type: String, required: false }, // Optional for Google Sign-In
     role: { type: String, enum: ['patient', 'admin'], default: 'patient' },
+    authProvider: { type: String, enum: ['local', 'google'], default: 'local' },
 }, { timestamps: true });
 
 // Hash password before saving (Mongoose 7+ promise-based, no next() needed)

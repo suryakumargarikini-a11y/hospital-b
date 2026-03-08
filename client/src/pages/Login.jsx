@@ -4,10 +4,11 @@ import { useFormik } from 'formik';
 import { loginSchema } from '../utils/validationSchemas';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
 
   const formik = useFormik({
     initialValues: { email: '', password: '' },
@@ -31,6 +32,30 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
           Login to MediBook
         </h2>
+
+        <div className="flex justify-center mb-6">
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              try {
+                await loginWithGoogle(credentialResponse.credential);
+                toast.success('Google Login successful!');
+                navigate('/dashboard');
+              } catch (err) {
+                toast.error(err.response?.data?.message || err.message || 'Google Auth Failed');
+              }
+            }}
+            onError={() => {
+              toast.error('Google Login Failed');
+            }}
+          />
+        </div>
+
+        <div className="flex items-center my-4">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <span className="px-3 text-gray-500 bg-white">OR</span>
+          <div className="flex-1 border-t border-gray-300"></div>
+        </div>
+
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
@@ -40,11 +65,10 @@ const Login = () => {
               id="email"
               type="email"
               {...formik.getFieldProps('email')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.email && formik.errors.email
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.email && formik.errors.email
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
@@ -58,11 +82,10 @@ const Login = () => {
               id="password"
               type="password"
               {...formik.getFieldProps('password')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.password && formik.errors.password
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.password && formik.errors.password
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.password && formik.errors.password && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.password}</p>

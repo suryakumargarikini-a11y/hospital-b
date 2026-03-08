@@ -4,10 +4,11 @@ import { useFormik } from 'formik';
 import { registerSchema } from '../utils/validationSchemas';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { register, loginWithGoogle } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -37,6 +38,30 @@ const Register = () => {
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
           Create an Account
         </h2>
+
+        <div className="flex justify-center mb-6">
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              try {
+                await loginWithGoogle(credentialResponse.credential);
+                toast.success('Google Registration successful!');
+                navigate('/dashboard');
+              } catch (err) {
+                toast.error(err.response?.data?.message || err.message || 'Google Auth Failed');
+              }
+            }}
+            onError={() => {
+              toast.error('Google Sign-In Failed');
+            }}
+          />
+        </div>
+
+        <div className="flex items-center my-4">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <span className="px-3 text-gray-500 bg-white">OR</span>
+          <div className="flex-1 border-t border-gray-300"></div>
+        </div>
+
         <form onSubmit={formik.handleSubmit}>
           {/* Full Name */}
           <div className="mb-4">
@@ -47,11 +72,10 @@ const Register = () => {
               id="name"
               type="text"
               {...formik.getFieldProps('name')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.name && formik.errors.name
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.name && formik.errors.name
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.name && formik.errors.name && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.name}</p>
@@ -67,11 +91,10 @@ const Register = () => {
               id="email"
               type="email"
               {...formik.getFieldProps('email')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.email && formik.errors.email
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.email && formik.errors.email
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
@@ -87,11 +110,10 @@ const Register = () => {
               id="password"
               type="password"
               {...formik.getFieldProps('password')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.password && formik.errors.password
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.password && formik.errors.password
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.password && formik.errors.password && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.password}</p>
@@ -107,11 +129,10 @@ const Register = () => {
               id="confirmPassword"
               type="password"
               {...formik.getFieldProps('confirmPassword')}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                formik.touched.confirmPassword && formik.errors.confirmPassword
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${formik.touched.confirmPassword && formik.errors.confirmPassword
                   ? 'border-red-500'
                   : 'border-gray-300'
-              }`}
+                }`}
             />
             {formik.touched.confirmPassword && formik.errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-1">{formik.errors.confirmPassword}</p>
