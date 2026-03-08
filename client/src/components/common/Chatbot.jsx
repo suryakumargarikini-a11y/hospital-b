@@ -202,19 +202,31 @@ export default function Chatbot() {
                 {/* Header */}
                 <div className="chatbot-header">
                     <div className="chatbot-header-avatar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                         </svg>
                     </div>
                     <div className="chatbot-header-info">
-                        <span className="chatbot-header-name">MediBot AI</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="chatbot-header-name">MediBot</span>
+                            <span style={{
+                                background: 'rgba(255,255,255,0.2)',
+                                border: '1px solid rgba(255,255,255,0.3)',
+                                borderRadius: '20px',
+                                padding: '1px 8px',
+                                fontSize: '10px',
+                                fontWeight: '700',
+                                letterSpacing: '0.5px',
+                                color: '#fff'
+                            }}>AI</span>
+                        </div>
                         <span className="chatbot-header-status">
                             <span className="status-dot" />
-                            AI Medical Assistant
+                            Online · Medical Assistant
                         </span>
                     </div>
                     <button className="chatbot-close-btn" onClick={() => setIsOpen(false)} aria-label="Close">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
                     </button>
@@ -328,12 +340,12 @@ export default function Chatbot() {
                 style={{ pointerEvents: 'auto' }} // Always clickable even when wrapper has pointer-events:none
             >
                 {isOpen ? (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
                 ) : (
                     <>
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                         </svg>
                         {hasUnread && <span className="chatbot-unread-dot" />}
