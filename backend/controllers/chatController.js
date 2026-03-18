@@ -1,6 +1,6 @@
-const { OpenAI } = require('openai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ── Medical System Prompt ─────────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are MediBot, an advanced AI Medical Assistant for MediBook Hospital. You help users understand their symptoms and guide them toward appropriate medical care. You are NOT a doctor and cannot provide definitive diagnoses.
@@ -156,7 +156,7 @@ const chatReply = async (req, res) => {
         return res.status(400).json({ reply: 'Please send a valid message.' });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    if (!process.env.GEMINI_API_KEY) {
         return res.status(503).json({
             reply: '⚠️ AI service is not configured. Please contact the hospital directly.',
             actions: [{ label: '📞 Contact Us', url: '/contact' }],
@@ -164,37 +164,31 @@ const chatReply = async (req, res) => {
     }
 
     try {
-        // Build messages array: system + history + current message
-        const messages = [
-            { role: 'system', content: SYSTEM_PROMPT },
-            // Conversation history (skip empty/error messages)
-            ...history
-                .filter(m => m.text && m.text.trim() && !m.text.startsWith('⚠️') && !m.text.startsWith('⏳'))
-                .map(m => ({
-                    role: m.from === 'user' ? 'user' : 'assistant',
-                    content: m.text,
-                })),
-            // Current user message
-            { role: 'user', content: message },
-        ];
-
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages,
-            temperature: 0.7,
-            max_tokens: 1024,
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            systemInstruction: SYSTEM_PROMPT
         });
 
-        const reply = completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again.";
+        // Conversation history (skip empty/error messages)
+        const formattedHistory = history
+            .filter(m => m.text && m.text.trim() && !m.text.startsWith('⚠️') && !m.text.startsWith('⏳'))
+            .map(m => ({
+                role: m.from === 'user' ? 'user' : 'model',
+                parts: [{ text: m.text }],
+            }));
+
+        const chat = model.startChat({ history: formattedHistory });
+        const result = await chat.sendMessage([{ text: message }]);
+        const reply = result.response.text() || "I'm sorry, I couldn't generate a response. Please try again.";
         const actions = detectActions(reply, message);
 
         return res.json({ reply, actions });
 
     } catch (err) {
-        console.error('OpenAI API error:', err.message || err);
+        console.error('Gemini API error:', err.message || err);
 
         const errMsg = (err.message || '').toLowerCase();
-        if (errMsg.includes('429') || errMsg.includes('rate') || errMsg.includes('quota')) {
+        if (errMsg.includes('429') || errMsg.includes('rate') || errMsg.includes('quota') || errMsg.includes('too many')) {
             return res.status(429).json({
                 reply: "⏳ I'm receiving many requests right now. Please wait a moment and try again.",
                 actions: [
