@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
@@ -9,19 +9,23 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Chatbot from './components/common/Chatbot';
 
 // Public Pages
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Emergency from './pages/Emergency';
-import Services from './pages/Services';
-import Doctors from './pages/Doctors';
-import Contact from './pages/Contact';
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
+const Emergency = lazy(() => import('./pages/Emergency'));
+const Services = lazy(() => import('./pages/Services'));
+const Doctors = lazy(() => import('./pages/Doctors'));
+const Contact = lazy(() => import('./pages/Contact'));
+const LabTests = lazy(() => import('./pages/LabTests'));
 
 // Protected Pages (require login)
-import Dashboard from './pages/Dashboard';
-import BookAppointment from './pages/BookAppointment';
-import MyAppointments from './pages/MyAppointments';
-import AdminDashboard from './pages/AdminDashboard'; // 👈 IMPORT ADMIN DASHBOARD
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const BookAppointment = lazy(() => import('./pages/BookAppointment'));
+const MyAppointments = lazy(() => import('./pages/MyAppointments'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const DoctorDashboard = lazy(() => import('./pages/DoctorDashboard'));
+const MedicalRecords = lazy(() => import('./pages/MedicalRecords'));
+const AddRecord = lazy(() => import('./pages/AddRecord'));
 
 function App() {
   return (
@@ -31,7 +35,12 @@ function App() {
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow pt-16">
-              <Routes>
+              <Suspense fallback={
+                <div className="flex justify-center items-center h-full min-h-[60vh]">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+              }>
+                <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -39,6 +48,7 @@ function App() {
                 <Route path="/emergency" element={<Emergency />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/doctors" element={<Doctors />} />
+                <Route path="/lab-tests" element={<LabTests />} />
                 <Route path="/contact" element={<Contact />} />
 
                 {/* Protected Routes - Regular Users */}
@@ -66,6 +76,22 @@ function App() {
                     </PrivateRoute>
                   }
                 />
+                <Route
+                  path="/medical-records"
+                  element={
+                    <PrivateRoute>
+                      <MedicalRecords />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/medical-records/new/:appointmentId"
+                  element={
+                    <PrivateRoute>
+                      <AddRecord />
+                    </PrivateRoute>
+                  }
+                />
 
                 {/* 👑 Admin Only Route */}
                 <Route
@@ -76,7 +102,18 @@ function App() {
                     </PrivateRoute>
                   }
                 />
-              </Routes>
+
+                {/* 🩺 Doctor Only Route */}
+                <Route
+                  path="/doctor-dashboard"
+                  element={
+                    <PrivateRoute>
+                      <DoctorDashboard />
+                    </PrivateRoute>
+                  }
+                />
+                </Routes>
+              </Suspense>
             </main>
             <Footer />
           </div>

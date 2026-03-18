@@ -78,6 +78,9 @@ const Home = () => {
               <img
                 src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
                 alt="Doctor consulting with patient"
+                fetchPriority="high"
+                width="880"
+                height="500"
                 className="rounded-2xl shadow-2xl w-full max-w-md mx-auto lg:mx-0 object-cover h-[400px] lg:h-[500px]"
               />
             </div>

@@ -52,6 +52,9 @@ const Navbar = () => {
             <Link to="/services" className="text-gray-700 hover:text-blue-600 font-medium transition">
               Services
             </Link>
+            <Link to="/lab-tests" className="text-gray-700 hover:text-blue-600 font-medium transition">
+              Lab Tests
+            </Link>
             
             {/* Emergency Button */}
             <Link
@@ -75,9 +78,27 @@ const Navbar = () => {
                   </Link>
                 )}
 
-                <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 font-medium transition">
-                  Dashboard
-                </Link>
+                {/* 🩺 DOCTOR LINK */}
+                {user.role === 'doctor' && (
+                  <Link
+                    to="/doctor-dashboard"
+                    className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition"
+                  >
+                    <FaCog className="mr-1" />
+                    Doctor Portal
+                  </Link>
+                )}
+
+                {user.role === 'patient' && (
+                  <>
+                    <Link to="/medical-records" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                      Records
+                    </Link>
+                    <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                      Dashboard
+                    </Link>
+                  </>
+                )}
                 
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-600">Hi, {user.name}</span>
@@ -111,6 +132,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none"
+            aria-label="Toggle Navigation"
           >
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
@@ -141,6 +163,13 @@ const Navbar = () => {
               >
                 Services
               </Link>
+              <Link
+                to="/lab-tests"
+                className="text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-blue-50 transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Lab Tests
+              </Link>
               
               {/* Mobile Emergency Link */}
               <Link
@@ -166,13 +195,36 @@ const Navbar = () => {
                     </Link>
                   )}
 
-                  <Link
-                    to="/dashboard"
-                    className="text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-blue-50 transition"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
+                  {/* 🩺 MOBILE DOCTOR LINK */}
+                  {user.role === 'doctor' && (
+                    <Link
+                      to="/doctor-dashboard"
+                      className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg font-medium transition"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <FaCog className="mr-2" />
+                      Doctor Portal
+                    </Link>
+                  )}
+
+                  {user.role === 'patient' && (
+                    <>
+                      <Link
+                        to="/medical-records"
+                        className="text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-blue-50 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Records
+                      </Link>
+                      <Link
+                        to="/dashboard"
+                        className="text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-blue-50 transition"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Dashboard
+                      </Link>
+                    </>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition text-left"

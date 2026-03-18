@@ -7,7 +7,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 // @desc    Register a new user
 // @route   POST /api/auth/register
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'All fields are required' });
   }
@@ -15,7 +15,8 @@ const registerUser = async (req, res) => {
   const existing = await User.findOne({ email });
   if (existing) return res.status(400).json({ message: 'Email already registered' });
 
-  const newUser = await User.create({ name, email, password, role: 'patient' });
+  const assignedRole = role === 'doctor' ? 'doctor' : 'patient';
+  const newUser = await User.create({ name, email, password, role: assignedRole });
 
   res.status(201).json({
     _id: newUser._id,

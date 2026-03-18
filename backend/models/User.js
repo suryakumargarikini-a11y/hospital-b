@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: false }, // Optional for Google Sign-In
-    role: { type: String, enum: ['patient', 'admin'], default: 'patient' },
+    role: { type: String, enum: ['patient', 'admin', 'doctor'], default: 'patient' },
     authProvider: { type: String, enum: ['local', 'google'], default: 'local' },
 }, { timestamps: true });
 

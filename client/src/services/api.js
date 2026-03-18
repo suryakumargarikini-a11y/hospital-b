@@ -169,3 +169,63 @@ export const getServices = async () => {
     throw error;
   }
 };
+
+// ---------- MEDICAL RECORDS ----------
+export const getMyRecords = async (userId) => {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+
+  try {
+    const response = await api.get('/records/my', {
+      headers: { 'x-user-id': userId.toString() }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Get records error:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const createMedicalRecord = async (recordData, doctorId) => {
+  if (!doctorId) {
+    throw new Error('Doctor ID is required');
+  }
+
+  try {
+    const response = await api.post('/records', recordData, {
+      headers: { 'x-user-id': doctorId.toString() }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Create record error:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// ---------- LAB TESTS ----------
+export const getAvailableTests = async () => {
+  try {
+    const response = await api.get('/labs/tests');
+    return response.data;
+  } catch (error) {
+    console.error('Get lab tests error:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const bookLabTest = async (bookingData, userId) => {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+
+  try {
+    const response = await api.post('/labs/book', bookingData, {
+      headers: { 'x-user-id': userId.toString() }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Book lab test error:', error.response?.data || error.message);
+    throw error;
+  }
+};

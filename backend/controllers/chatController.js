@@ -1,6 +1,6 @@
-const Groq = require('groq-sdk');
+const { OpenAI } = require('openai');
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // ── Medical System Prompt ─────────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are MediBot, an advanced AI Medical Assistant for MediBook Hospital. You help users understand their symptoms and guide them toward appropriate medical care. You are NOT a doctor and cannot provide definitive diagnoses.
@@ -156,7 +156,7 @@ const chatReply = async (req, res) => {
         return res.status(400).json({ reply: 'Please send a valid message.' });
     }
 
-    if (!process.env.GROQ_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
         return res.status(503).json({
             reply: '⚠️ AI service is not configured. Please contact the hospital directly.',
             actions: [{ label: '📞 Contact Us', url: '/contact' }],
@@ -178,8 +178,8 @@ const chatReply = async (req, res) => {
             { role: 'user', content: message },
         ];
 
-        const completion = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile',
+        const completion = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
             messages,
             temperature: 0.7,
             max_tokens: 1024,
@@ -191,7 +191,7 @@ const chatReply = async (req, res) => {
         return res.json({ reply, actions });
 
     } catch (err) {
-        console.error('Groq API error:', err.message || err);
+        console.error('OpenAI API error:', err.message || err);
 
         const errMsg = (err.message || '').toLowerCase();
         if (errMsg.includes('429') || errMsg.includes('rate') || errMsg.includes('quota')) {

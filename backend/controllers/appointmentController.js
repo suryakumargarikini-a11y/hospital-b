@@ -28,7 +28,12 @@ const createAppointment = async (req, res) => {
 // @desc    Get appointments for logged-in user
 // @route   GET /api/appointments/my
 const getMyAppointments = async (req, res) => {
-  const appointments = await Appointment.find({ userId: req.user._id }).sort({ createdAt: -1 });
+  let appointments;
+  if (req.user.role === 'doctor') {
+    appointments = await Appointment.find({ doctor: req.user.name }).sort({ createdAt: -1 });
+  } else {
+    appointments = await Appointment.find({ userId: req.user._id }).sort({ createdAt: -1 });
+  }
   res.json(appointments);
 };
 

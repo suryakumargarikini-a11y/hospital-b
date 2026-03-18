@@ -22,6 +22,8 @@ app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/doctors', require('./routes/doctorRoutes'));
 app.use('/api/services', require('./routes/serviceRoutes'));
 app.use('/api/chat', require('./routes/chatRoutes'));
+app.use('/api/records', require('./routes/recordRoutes'));
+app.use('/api/labs', require('./routes/labRoutes'));
 
 app.get('/', (req, res) => {
   res.send('🏥 MediBook API is running...');
