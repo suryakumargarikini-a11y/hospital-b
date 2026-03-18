@@ -22,16 +22,16 @@ const Footer = () => {
               Trusted by thousands of patients and hundreds of doctors.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-white transition">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-white transition">
                 <FaTwitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-white transition">
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white transition">
                 <FaLinkedin size={20} />
               </a>
             </div>

@@ -130,7 +130,7 @@ const LabTests = () => {
                     <h3 className="text-2xl font-bold mb-1">Book Lab Test</h3>
                     <p className="text-indigo-100 font-medium">{selectedTest.name}</p>
                   </div>
-                  <button onClick={() => setSelectedTest(null)} className="text-white hover:text-gray-200 transition">
+                  <button onClick={() => setSelectedTest(null)} aria-label="Close" className="text-white hover:text-gray-200 transition">
                     <span className="text-3xl">&times;</span>
                   </button>
                 </div>
